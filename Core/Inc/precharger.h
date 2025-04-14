@@ -36,6 +36,16 @@ typedef enum
 	PC_MODE_END
 }_PRECHARGER_STATE;
 
+
+typedef enum
+{
+	PC_OFF=0,
+	PC_ON=1,
+	PC_ON_OFF,
+	PC_PWM,
+	PC_DONE,
+}_PRECHARGER_MODE;
+
 /**
  * @struct	REG
  * @brief	Registersatz des Controllers.
@@ -44,17 +54,31 @@ typedef enum
  */
  typedef struct
  {
-	 uint8_t	time_index;				//10ms index of running pb
-	 uint32_t	ch_ebable_mask;
-	 uint8_t	ch_val[PC_MAX_CHANNEL];
-	 //uint8_t	last_spi_buf[3];
+	 uint16_t			time_index;				//10ms index of running pb
+	 uint16_t			value;
+	 _PRECHARGER_MODE	mode;
+ }_PC_CHANNEL;
+
+
+/**
+ * @struct	REG
+ * @brief	Registersatz des Controllers.
+ *
+ * @note	Der Registersatz wird im RAM und im EEProm gehalten
+ */
+ typedef struct
+ {
+	 uint16_t		time_index;				//10ms index of running pb
+	 uint8_t		ch_ebable_mask;
+	 uint8_t		ch_replay_mask;
+	 _PC_CHANNEL	ch[PC_MAX_CHANNEL];
  }_PC_CTRL_STRUCT;
 
 
-void PreCharger_init(void);
-void PreCharger_set(uint8_t channel, uint8_t value);
+void 	PreCharger_init(void);
+uint8_t PreCharger_set(uint8_t channel, uint16_t value, uint8_t replay, _PRECHARGER_MODE mode);
 uint8_t	process_PreCharger(void);
-void PC_OutputEnable(GPIO_PinState PinState);
+void 	PC_OutputEnable(GPIO_PinState PinState);
 
 
 #ifdef __cplusplus

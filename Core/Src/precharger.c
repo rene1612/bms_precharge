@@ -34,29 +34,41 @@ void PC_OutputEnable(GPIO_PinState PinState) {
 
 void PreCharger_init(void)
 {
-	HAL_StatusTypeDef result=HAL_OK;
+	//HAL_StatusTypeDef result=HAL_OK;
 	//uint8_t spi_buffer[3]={0x00,0x00,0x00};
 
 	PC_OutputEnable(0);
 
 
 	pc_ctrl.time_index = 0;
-	pc_ctrl.ch_ebable_mask = 0U;
+	pc_ctrl.ch_ebable_mask = 0x00;
+	pc_ctrl.ch_replay_mask = 0x00;
 
 	//set pins to Low
 }
 
 
-void PreCharger_set(uint8_t channel, uint8_t value)
+uint8_t PreCharger_set(uint8_t channel, uint16_t value, uint8_t replay, _PRECHARGER_MODE mode)
 {
 
 	assert(channel<PC_MAX_CHANNEL);
 
-	pc_ctrl.ch_val[channel] = value;
+	pc_ctrl.ch[channel].value = value;
+	pc_ctrl.ch[channel].mode = mode;
 
-	if(value) {
+	if(value && mode) {
 		pc_ctrl.ch_ebable_mask |= 1<<channel;
+
+		if(replay) {
+			pc_ctrl.ch_replay_mask |= 1<<channel;
+		}
+
+		pc_ctrl.ch[channel].time_index = pc_ctrl.time_index;
+
+		return 1;
 	}
+
+	return 0;
 }
 
 
@@ -65,12 +77,12 @@ uint8_t	process_PreCharger(void)
 {
 
 	//uint8_t ch_mask=0;
+	HAL_StatusTypeDef result=HAL_OK;
 
 	if (pc_ctrl.ch_ebable_mask) {
 
 		uint8_t ch;
 		//uint8_t spi_buffer[3]={0x00,0x00,0x00};
-		HAL_StatusTypeDef result=HAL_OK;
 
 		pc_ctrl.time_index++;
 
@@ -78,11 +90,11 @@ uint8_t	process_PreCharger(void)
 
 			if (pc_ctrl.ch_ebable_mask & 1<<ch) {
 
-				if (pc_ctrl.ch_val[ch]==0) {
+				if (pc_ctrl.ch[ch].value==0) {
 					pc_ctrl.ch_ebable_mask &= ~(1<<ch);
 				}else {
 
-					if (!(pc_ctrl.time_index >= pc_ctrl.ch_val[ch])) {
+					if (!(pc_ctrl.time_index >= pc_ctrl.ch[ch].value)) {
 						//set
 						//ch_mask |= (1<<(ch%8));
 					}
@@ -92,5 +104,5 @@ uint8_t	process_PreCharger(void)
 
 	}
 
-	return 0;
+	return result;
 }
