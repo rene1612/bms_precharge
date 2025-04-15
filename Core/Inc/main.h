@@ -262,16 +262,11 @@ typedef enum
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define MCU_DRDY_Pin GPIO_PIN_2
-#define MCU_DRDY_GPIO_Port GPIOA
-#define MCU_SYNC_RESET_Pin GPIO_PIN_3
-#define MCU_SYNC_RESET_GPIO_Port GPIOA
-#define SPI1_CS_Pin GPIO_PIN_4
-#define SPI1_CS_GPIO_Port GPIOA
 #define LED_GREEN_Pin GPIO_PIN_12
 #define LED_GREEN_GPIO_Port GPIOB
 #define LED_RED_Pin GPIO_PIN_13
 #define LED_RED_GPIO_Port GPIOB
+
 #define RELAY_1_Pin GPIO_PIN_14
 #define RELAY_1_GPIO_Port GPIOB
 #define RELAY_2_Pin GPIO_PIN_15
@@ -287,30 +282,39 @@ typedef enum
 
 #if __BOARD_VERSION__ == 0x0100
 
-#undef LED_RED_Pin
-#undef LED_RED_GPIO_Port
-#undef RELAY_1_Pin
-#undef RELAY_1_GPIO_Port
-#undef RELAY_2_Pin
-#undef RELAY_2_GPIO_Port
-#undef RELAY_3_Pin
-#undef RELAY_3_GPIO_Port
-#undef RELAY_4_Pin
-#undef RELAY_4_GPIO_Port
-#undef RELAY_5_Pin
-#undef RELAY_5_GPIO_Port
+	#undef LED_RED_Pin
+	#undef LED_RED_GPIO_Port
+	#undef RELAY_1_Pin
+	#undef RELAY_1_GPIO_Port
+	#undef RELAY_2_Pin
+	#undef RELAY_2_GPIO_Port
+	#undef RELAY_3_Pin
+	#undef RELAY_3_GPIO_Port
+	#undef RELAY_4_Pin
+	#undef RELAY_4_GPIO_Port
+	#undef RELAY_5_Pin
+	#undef RELAY_5_GPIO_Port
 
-#define LED_RED_Pin 0
-#define LED_RED_GPIO_Port GPIOB
-#define RELAY_1_Pin GPIO_PIN_13
-#define RELAY_1_GPIO_Port GPIOB
-#define RELAY_2_Pin GPIO_PIN_14
-#define RELAY_2_GPIO_Port GPIOB
-#define RELAY_3_Pin GPIO_PIN_15
-#define RELAY_3_GPIO_Port GPIOB
+	#define LED_RED_Pin 0
+	#define LED_RED_GPIO_Port GPIOB
+	#define RELAY_1_Pin GPIO_PIN_13
+	#define RELAY_1_GPIO_Port GPIOB
+	#define RELAY_2_Pin GPIO_PIN_14
+	#define RELAY_2_GPIO_Port GPIOB
+	#define RELAY_3_Pin GPIO_PIN_15
+	#define RELAY_3_GPIO_Port GPIOB
 
-#define RELAY_4_Pin 0
-#define RELAY_5_Pin 0
+	#define RELAY_4_Pin 0
+	#define RELAY_5_Pin 0
+
+	#define EXT_PA2		GPIO_PIN_2
+	#define EXT_PA3		GPIO_PIN_3
+	#define EXT_PA4		GPIO_PIN_4
+	#define EXT_PA5		GPIO_PIN_5
+	#define EXT_PA6		GPIO_PIN_6
+	#define EXT_PA7		GPIO_PIN_7
+	#define EXT_PA8		GPIO_PIN_8
+	#define EXT_PAX_GPIO_Port	GPIOA
 
 #elif __BOARD_VERSION__ >= 0x0200
  	 //Stuff for next Board-Version
@@ -328,7 +332,7 @@ typedef enum
 
 #define __DEV_SIGNATURE__			0x12
 #define __SW_RELEASE__				0x0100
-#define SW_RELEASE_DAY				12
+#define SW_RELEASE_DAY				15
 #define SW_RELEASE_MONTH			04
 #define SW_RELEASE_YEAR				2025
 #define __SW_RELEASE_DATE__			((SW_RELEASE_DAY<<24 ) | (SW_RELEASE_MONTH<<16) | SW_RELEASE_YEAR)
