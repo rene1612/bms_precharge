@@ -55,14 +55,14 @@ void MX_GPIO_Init(void)
   /* USER CODE BEGIN 2 */
   #if __BOARD_VERSION__ == 0x0100
 	  /*Configure GPIO pin Output Level */
-	  HAL_GPIO_WritePin(GPIOA, RELAY_4_Pin | RELAY_5_Pin | EXT_PA2 | EXT_PA3 | EXT_PA4 | EXT_PA5 | EXT_PA6 | EXT_PA7 | EXT_PA8, GPIO_PIN_RESET);
+	  HAL_GPIO_WritePin(GPIOA, RELAY_4_Pin | RELAY_5_Pin | EXT_PA2_PIN | EXT_PA3_PIN | EXT_PA4_PIN | EXT_PA5_PIN | EXT_PA6_PIN | EXT_PA7_PIN | EXT_PA8_PIN, GPIO_PIN_RESET);
 
 	  /*Configure GPIO pin Output Level */
-	  HAL_GPIO_WritePin(GPIOB, LED_GREEN_Pin|LED_RED_Pin|RELAY_1_Pin|RELAY_2_Pin|RELAY_3_Pin, GPIO_PIN_RESET);
+	  HAL_GPIO_WritePin(GPIOB, LED_GREEN_Pin | LED_RED_Pin | RELAY_1_Pin | RELAY_2_Pin | RELAY_3_Pin, GPIO_PIN_RESET);
 
 	  /*Configure GPIO pins : PAPin PAPin PAPin PAPin
 							   PAPin */
-	  GPIO_InitStruct.Pin = RELAY_4_Pin |RELAY_5_Pin | EXT_PA2 | EXT_PA3 | EXT_PA4 | EXT_PA5 | EXT_PA6 | EXT_PA7 | EXT_PA8;
+	  GPIO_InitStruct.Pin = RELAY_4_Pin |RELAY_5_Pin | EXT_PA2_PIN | EXT_PA3_PIN | EXT_PA4_PIN | EXT_PA5_PIN | EXT_PA6_PIN | EXT_PA7_PIN | EXT_PA8_PIN;
 	  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	  GPIO_InitStruct.Pull = GPIO_NOPULL;
 	  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

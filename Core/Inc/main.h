@@ -40,7 +40,7 @@ extern "C" {
 //	#define __BOARD_TYPE__				BMS_MEASURE_BOARD
 //	#define __BOARD_TYPE__				BMS_BALANCE_BOARD
 //	#define __BOARD_TYPE__				BMS_BLK_BOARD
-	#define __BOARD_TYPE__				BMS_PECHARGE_BOARD
+	#define __BOARD_TYPE__				BMS_PRECHARGER_BOARD
 #endif
 
 
@@ -123,15 +123,18 @@ ERR_ALIVE=				0x04,
 
 
 //#define SYSTEM_TRIP_RELAY		0x01
-#define PC_RELAY1				0x02
-#define PC_RELAY2				0x04
-#if __BOARD_VERSION__ >= 0x0200
- #define PC_RELAY3				0x08
- #define PC_RELAY4				0x10
-#else
- #define PC_RELAY3				0x00
- #define PC_RELAY4				0x00
-#endif
+#define PC_RELAY1				0x01
+#define PC_RELAY2				0x02
+#define PC_RELAY3				0x04
+
+#define EXT_PA1				0x01
+#define EXT_PA2				0x02
+#define EXT_PA3				0x04
+#define EXT_PA4				0x08
+#define EXT_PA5				0x10
+#define EXT_PA6				0x20
+#define EXT_PA7				0x40
+#define EXT_PA8				0x80
 
 
 
@@ -307,13 +310,13 @@ typedef enum
 	#define RELAY_4_Pin 0
 	#define RELAY_5_Pin 0
 
-	#define EXT_PA2		GPIO_PIN_2
-	#define EXT_PA3		GPIO_PIN_3
-	#define EXT_PA4		GPIO_PIN_4
-	#define EXT_PA5		GPIO_PIN_5
-	#define EXT_PA6		GPIO_PIN_6
-	#define EXT_PA7		GPIO_PIN_7
-	#define EXT_PA8		GPIO_PIN_8
+	#define EXT_PA2_PIN		GPIO_PIN_2
+	#define EXT_PA3_PIN		GPIO_PIN_3
+	#define EXT_PA4_PIN		GPIO_PIN_4
+	#define EXT_PA5_PIN		GPIO_PIN_5
+	#define EXT_PA6_PIN		GPIO_PIN_6
+	#define EXT_PA7_PIN		GPIO_PIN_7
+	#define EXT_PA8_PIN		GPIO_PIN_8
 	#define EXT_PAX_GPIO_Port	GPIOA
 
 #elif __BOARD_VERSION__ >= 0x0200
@@ -353,13 +356,9 @@ typedef enum
   * Zustände
   */
 #define STATE_OFF					0x00	//!<Keine Blinken (LED aus)
-
 #define STATE_OK					0x4F	//!<Zustand alles OK (gleichmäßiges "langsames" Blinken Tastverhältnis 50/50)
-
 #define STATE_WARN					0xCC	//!<Zustand Warnung (gleichmäßiges "schnelles" Blinken Tastverhältnis 50/50)
-
 #define STATE_ERR_UNKNOWN			0x1F	//!<Zustand unbekannter Fehler (gleichmäßiges "sehr schnelles" Blinken Tastverhältnis 50/50)
-
 #define STATE_ERR_HEADSINK_TEMP		0x11	//!<Zustand Fehler Kühlkörper-Temperatur zu hoch (einmal kurzes blinken)
 
 

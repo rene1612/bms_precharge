@@ -37,7 +37,7 @@ CAN_RxHeaderTypeDef RxHeader;
 uint8_t				can_replay_msg;
 uint8_t             CanRxData[8];
 //CAN_FilterTypeDef 	canfilterconfig;
-uint8_t				channels_2_send, current_channel_2_send;
+//uint8_t				channels_2_send, current_channel_2_send;
 //uint8_t				current_blk_data_2_send;
 //_BMSM_ADC_DATA1		bmsm_adc_data[CHANNEL_COUNT];
 
@@ -240,49 +240,77 @@ uint8_t	process_CAN(void)
 	{
 		switch (CanRxData[0])
 		{
-		case SET_RELAY_CMD:
+		case BMSP_SET_EXT_OUT:
 
-			//_RELAY1
-			if (CanRxData[1] & PC_RELAY1)	{
-				if (CanRxData[2] & PC_RELAY1) {
-					HAL_GPIO_WritePin(RELAY_2_GPIO_Port, RELAY_2_Pin, GPIO_PIN_SET);
+			//EXT_PA2
+			if (CanRxData[1] & EXT_PA2)	{
+				if (CanRxData[2] & EXT_PA2) {
+					HAL_GPIO_WritePin(EXT_PAX_GPIO_Port, EXT_PA2_PIN, GPIO_PIN_SET);
 				}
 				else {
-					HAL_GPIO_WritePin(RELAY_2_GPIO_Port, RELAY_2_Pin, GPIO_PIN_RESET);
+					HAL_GPIO_WritePin(EXT_PAX_GPIO_Port, EXT_PA2_PIN, GPIO_PIN_RESET);
 				}
 			}
 
-			//_RELAY2
-			if (CanRxData[1] & PC_RELAY2)	{
-				if (CanRxData[2] & PC_RELAY2) {
-					HAL_GPIO_WritePin(RELAY_3_GPIO_Port, RELAY_3_Pin, GPIO_PIN_SET);
+			//EXT_PA3
+			if (CanRxData[1] & EXT_PA3)	{
+				if (CanRxData[2] & EXT_PA3) {
+					HAL_GPIO_WritePin(EXT_PAX_GPIO_Port, EXT_PA3_PIN, GPIO_PIN_SET);
 				}
 				else {
-					HAL_GPIO_WritePin(RELAY_3_GPIO_Port, RELAY_3_Pin, GPIO_PIN_RESET);
+					HAL_GPIO_WritePin(EXT_PAX_GPIO_Port, EXT_PA3_PIN, GPIO_PIN_RESET);
 				}
 			}
 
-#if __BOARD_VERSION__ >= 0x0200
-			//CFT_RELAY3
-			if (CanRxData[1] & PC_RELAY3)	{
-				if (CanRxData[2] & PC_RELAY3) {
-					HAL_GPIO_WritePin(RELAY_4_GPIO_Port, RELAY_4_Pin, GPIO_PIN_SET);
+			//EXT_PA4
+			if (CanRxData[1] & EXT_PA4)	{
+				if (CanRxData[2] & EXT_PA4) {
+					HAL_GPIO_WritePin(EXT_PAX_GPIO_Port, EXT_PA4_PIN, GPIO_PIN_SET);
 				}
 				else {
-					HAL_GPIO_WritePin(RELAY_4_GPIO_Port, RELAY_4_Pin, GPIO_PIN_RESET);
+					HAL_GPIO_WritePin(EXT_PAX_GPIO_Port, EXT_PA4_PIN, GPIO_PIN_RESET);
 				}
 			}
 
-			//CFT_RELAY4
-			if (CanRxData[1] & PC_RELAY4)	{
-				if (CanRxData[2] & PC_RELAY4) {
-					HAL_GPIO_WritePin(RELAY_5_GPIO_Port, RELAY_5_Pin, GPIO_PIN_SET);
+			//EXT_PA5
+			if (CanRxData[1] & EXT_PA5)	{
+				if (CanRxData[2] & EXT_PA5) {
+					HAL_GPIO_WritePin(EXT_PAX_GPIO_Port, EXT_PA5_PIN, GPIO_PIN_SET);
 				}
 				else {
-					HAL_GPIO_WritePin(RELAY_5_GPIO_Port, RELAY_5_Pin, GPIO_PIN_RESET);
+					HAL_GPIO_WritePin(EXT_PAX_GPIO_Port, EXT_PA5_PIN, GPIO_PIN_RESET);
 				}
 			}
-#endif
+
+			//EXT_PA6
+			if (CanRxData[1] & EXT_PA6)	{
+				if (CanRxData[2] & EXT_PA6) {
+					HAL_GPIO_WritePin(EXT_PAX_GPIO_Port, EXT_PA6_PIN, GPIO_PIN_SET);
+				}
+				else {
+					HAL_GPIO_WritePin(EXT_PAX_GPIO_Port, EXT_PA6_PIN, GPIO_PIN_RESET);
+				}
+			}
+
+			//EXT_PA7
+			if (CanRxData[1] & EXT_PA7)	{
+				if (CanRxData[2] & EXT_PA7) {
+					HAL_GPIO_WritePin(EXT_PAX_GPIO_Port, EXT_PA7_PIN, GPIO_PIN_SET);
+				}
+				else {
+					HAL_GPIO_WritePin(EXT_PAX_GPIO_Port, EXT_PA7_PIN, GPIO_PIN_RESET);
+				}
+			}
+
+			//EXT_PA8
+			if (CanRxData[1] & EXT_PA8)	{
+				if (CanRxData[2] & EXT_PA8) {
+					HAL_GPIO_WritePin(EXT_PAX_GPIO_Port, EXT_PA8_PIN, GPIO_PIN_SET);
+				}
+				else {
+					HAL_GPIO_WritePin(EXT_PAX_GPIO_Port, EXT_PA8_PIN, GPIO_PIN_RESET);
+				}
+			}
 
 			CanTxData[1] = ACK;
 			CanTxData[0] = REPLAY_AKC_NACK_CMD;
