@@ -34,29 +34,29 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := bms-precharge
+BUILD_ARTIFACT_NAME := bms_precharge
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-bms-precharge.elf \
+bms_precharge.elf \
 
 MAP_FILES += \
-bms-precharge.map \
+bms_precharge.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-bms-precharge.list \
+bms_precharge.list \
 
 OBJCOPY_HEX += \
-bms-precharge.hex \
+bms_precharge.hex \
 
 OBJCOPY_BIN += \
-bms-precharge.bin \
+bms_precharge.bin \
 
 
 # All Target
@@ -64,11 +64,11 @@ all:
 	+@$(MAKE) --no-print-directory pre-build && $(MAKE) --no-print-directory main-build && $(MAKE) --no-print-directory post-build
 
 # Main-build Target
-main-build: bms-precharge.elf secondary-outputs
+main-build: bms_precharge.elf secondary-outputs
 
 # Tool invocations
-bms-precharge.elf bms-precharge.map: $(OBJS) $(USER_OBJS) C:\Users\res\STM32CubeIDE\workspace_1.12.0\bms-precharge\STM32F103CBTX_FLASH_debug.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "bms-precharge.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\res\STM32CubeIDE\workspace_1.12.0\bms-precharge\STM32F103CBTX_FLASH_debug.ld" --specs=nosys.specs -Wl,-Map="bms-precharge.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+bms_precharge.elf bms_precharge.map: $(OBJS) $(USER_OBJS) C:\Users\res\STM32CubeIDE\workspace_1.12.0\bms_precharge\STM32F103CBTX_FLASH_debug.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "bms_precharge.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\res\STM32CubeIDE\workspace_1.12.0\bms_precharge\STM32F103CBTX_FLASH_debug.ld" --specs=nosys.specs -Wl,-Map="bms_precharge.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -77,24 +77,24 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-bms-precharge.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "bms-precharge.list"
+bms_precharge.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "bms_precharge.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-bms-precharge.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "bms-precharge.hex"
+bms_precharge.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "bms_precharge.hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-bms-precharge.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "bms-precharge.bin"
+bms_precharge.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "bms_precharge.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) bms-precharge.bin bms-precharge.elf bms-precharge.hex bms-precharge.list bms-precharge.map default.size.stdout
+	-$(RM) bms_precharge.bin bms_precharge.elf bms_precharge.hex bms_precharge.list bms_precharge.map default.size.stdout
 	-@echo ' '
 
 pre-build:
@@ -102,7 +102,7 @@ pre-build:
 	-@echo ' '
 
 post-build:
-	arm-none-eabi-objcopy -O ihex bms-precharge.elf bms-precharge.hex
+	arm-none-eabi-objcopy -O ihex bms_precharge.elf bms_precharge.hex
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX) $(OBJCOPY_BIN)

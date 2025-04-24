@@ -240,6 +240,28 @@ uint8_t	process_CAN(void)
 	{
 		switch (CanRxData[0])
 		{
+		case BMSP_SET_CMD:
+
+			if (main_regs.ctrl & (1<<REG_CTRL_ENABLE_PC)) {
+
+				if (PreCharger_set(CanRxData[1], (uint16_t)CanRxData[2], CanRxData[4], CanRxData[5])) {
+					CanTxData[1] = ACK;
+				}
+				else {
+					CanTxData[1] = NACK;
+				}
+			}
+			else {
+				CanTxData[1] = NACK;
+
+			}
+
+			CanTxData[0] = REPLAY_AKC_NACK_CMD;
+			ReplayHeader.DLC = 2;
+			can_task_scheduler |= PROCESS_CAN_SEND_REPLAY;
+			break;
+
+
 		case BMSP_SET_EXT_OUT:
 
 			//EXT_PA2

@@ -306,6 +306,7 @@ typedef enum
 	#define RELAY_2_GPIO_Port GPIOB
 	#define RELAY_3_Pin GPIO_PIN_15
 	#define RELAY_3_GPIO_Port GPIOB
+	#define RELAY_GPIO_Port GPIOB
 
 	#define RELAY_4_Pin 0
 	#define RELAY_5_Pin 0

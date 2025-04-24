@@ -39,8 +39,8 @@ typedef enum
 
 typedef enum
 {
-	PC_OFF=0,
 	PC_ON=1,
+	PC_OFF,
 	PC_ON_OFF,
 	PC_PWM,
 	PC_DONE,
@@ -56,7 +56,12 @@ typedef enum
  {
 	 uint16_t			time_index;				//10ms index of running pb
 	 uint16_t			value;
+	 uint16_t			on_time;
+	 uint16_t			off_time;
 	 _PRECHARGER_MODE	mode;
+	 GPIO_TypeDef 		*GPIOx;
+	 uint16_t 			GPIO_Pin;
+
  }_PC_CHANNEL;
 
 

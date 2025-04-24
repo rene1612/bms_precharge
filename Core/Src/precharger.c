@@ -44,6 +44,13 @@ void PreCharger_init(void)
 	pc_ctrl.ch_ebable_mask = 0x00;
 	pc_ctrl.ch_replay_mask = 0x00;
 
+	pc_ctrl.ch[0].GPIOx = RELAY_1_GPIO_Port;
+	pc_ctrl.ch[0].GPIO_Pin = RELAY_1_Pin;
+	pc_ctrl.ch[1].GPIOx = RELAY_2_GPIO_Port;
+	pc_ctrl.ch[1].GPIO_Pin = RELAY_2_Pin;
+	pc_ctrl.ch[2].GPIOx = RELAY_3_GPIO_Port;
+	pc_ctrl.ch[2].GPIO_Pin = RELAY_3_Pin;
+
 	//set pins to Low
 }
 
@@ -56,11 +63,29 @@ uint8_t PreCharger_set(uint8_t channel, uint16_t value, uint8_t replay, _PRECHAR
 	pc_ctrl.ch[channel].value = value;
 	pc_ctrl.ch[channel].mode = mode;
 
-	if(value && mode) {
+	if(mode) {
 		pc_ctrl.ch_ebable_mask |= 1<<channel;
 
 		if(replay) {
 			pc_ctrl.ch_replay_mask |= 1<<channel;
+		}
+
+		switch (mode) {
+
+			case PC_PWM:
+
+
+			case PC_ON:
+				HAL_GPIO_WritePin(pc_ctrl.ch[channel].GPIOx, pc_ctrl.ch[channel].GPIO_Pin, GPIO_PIN_SET);
+				break;
+
+			case PC_OFF:
+				HAL_GPIO_WritePin(pc_ctrl.ch[channel].GPIOx, pc_ctrl.ch[channel].GPIO_Pin, GPIO_PIN_RESET);
+				break;
+
+			default:
+				break;
+
 		}
 
 		pc_ctrl.ch[channel].time_index = pc_ctrl.time_index;
