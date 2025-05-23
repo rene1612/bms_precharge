@@ -44,12 +44,14 @@ void PreCharger_init(void)
 	pc_ctrl.ch_ebable_mask = 0x00;
 	pc_ctrl.ch_replay_mask = 0x00;
 
-	pc_ctrl.ch[0].GPIOx = RELAY_1_GPIO_Port;
-	pc_ctrl.ch[0].GPIO_Pin = RELAY_1_Pin;
-	pc_ctrl.ch[1].GPIOx = RELAY_2_GPIO_Port;
-	pc_ctrl.ch[1].GPIO_Pin = RELAY_2_Pin;
-	pc_ctrl.ch[2].GPIOx = RELAY_3_GPIO_Port;
-	pc_ctrl.ch[2].GPIO_Pin = RELAY_3_Pin;
+	pc_ctrl.ch[0].GPIOx = PRECHARGE_GPIO_Port;
+	pc_ctrl.ch[0].GPIO_Pin = PRECHARGE_PIN_1;
+	pc_ctrl.ch[1].GPIOx = PRECHARGE_GPIO_Port;
+	pc_ctrl.ch[1].GPIO_Pin = PRECHARGE_PIN_2;
+	pc_ctrl.ch[2].GPIOx = PRECHARGE_GPIO_Port;
+	pc_ctrl.ch[2].GPIO_Pin = PRECHARGE_PIN_3;
+	pc_ctrl.ch[3].GPIOx = PRECHARGE_GPIO_Port;
+	pc_ctrl.ch[3].GPIO_Pin = PRECHARGE_PIN_4;
 
 	//set pins to Low
 }

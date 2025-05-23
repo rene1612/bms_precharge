@@ -122,10 +122,20 @@ ERR_ALIVE=				0x04,
 
 
 
-//#define SYSTEM_TRIP_RELAY		0x01
+//#define SYSTEM_RELAY		0x01
+#define INT_RELAY1				0x01
+#define INT_RELAY2				0x02
+#define INT_RELAY3				0x04
+#define EXT_RELAY1				0x10
+#define EXT_RELAY2				0x20
+#define EXT_RELAY3				0x40
+#define EXT_RELAY4				0x80
+
+
 #define PC_RELAY1				0x01
 #define PC_RELAY2				0x02
 #define PC_RELAY3				0x04
+#define PC_RELAY4				0x08
 
 #define EXT_PA1				0x01
 #define EXT_PA2				0x02
@@ -319,6 +329,16 @@ typedef enum
 	#define EXT_PA7_PIN		GPIO_PIN_7
 	#define EXT_PA8_PIN		GPIO_PIN_8
 	#define EXT_PAX_GPIO_Port	GPIOA
+
+	#define EXT_RELAY_PIN_1		EXT_PA3_PIN
+	#define EXT_RELAY_PIN_3		EXT_PA8_PIN
+	#define EXT_RELAY_PIN_4		EXT_PA2_PIN
+	#define EXT_RELAY_GPIO_Port	GPIOA
+	#define PRECHARGE_PIN_1		EXT_PA6_PIN
+	#define PRECHARGE_PIN_2		EXT_PA4_PIN
+	#define PRECHARGE_PIN_3		EXT_PA5_PIN
+	#define PRECHARGE_PIN_4		EXT_PA7_PIN
+	#define PRECHARGE_GPIO_Port	GPIOA
 
 #elif __BOARD_VERSION__ >= 0x0200
  	 //Stuff for next Board-Version

@@ -27,7 +27,7 @@ extern "C" {
 #include "main.h"
 
 
-#define PC_MAX_CHANNEL 3
+#define PC_MAX_CHANNEL 4
 
 typedef enum
 {
